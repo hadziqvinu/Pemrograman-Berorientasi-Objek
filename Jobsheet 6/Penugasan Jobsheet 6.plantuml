@@ -1,0 +1,27 @@
+@startuml HierarkiSenjata
+abstract class Senjata {
+    - nama : str
+    + __init__(nama: str)
+    + {abstract} serang()
+    + {abstract} ammo_atau_daya_tahan : property
+    + info_nama()
+}
+
+class Pedang {
+    - panjang_bilah : float
+    + __init__(nama: str, panjang_bilah: float)
+    + serang()
+    + ammo_atau_daya_tahan : property
+}
+
+class Panah {
+    - jumlah_anak_panah : int
+    + __init__(nama: str, jumlah_anak_panah: int)
+    + serang()
+    + ammo_atau_daya_tahan : property
+    + ammo_atau_daya_tahan(val: int) : setter
+}
+
+Senjata <|-- Pedang
+Senjata <|-- Panah
+@enduml
