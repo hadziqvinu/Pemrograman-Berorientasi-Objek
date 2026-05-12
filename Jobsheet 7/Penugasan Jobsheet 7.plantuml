@@ -1,0 +1,38 @@
+@startuml InventarisBarang
+
+class InventarisBarang {
+    # _items : dict
+    --
+    + __init__()
+    + tambah_barang(kode, jumlah) : void
+    + ambil_barang(kode, jumlah) : void
+    + cek_stok(kode) : void
+}
+
+note right of InventarisBarang::tambah_barang
+  **try:** validasi jumlah (int positif)
+  **except ValueError:** cetak error
+  **raise KeyError:** jika kode sudah ada
+end note
+
+note right of InventarisBarang::ambil_barang
+  **try:** validasi jumlah & cek kode
+  **except ValueError:** cetak error jumlah
+  **except KeyError:** cetak error kode tidak ada
+  **raise ValueError:** jika stok tidak cukup
+end note
+
+note right of InventarisBarang::cek_stok
+  **try:** akses _items[kode]
+  **except KeyError:** cetak barang tidak ada
+  **else:** cetak jumlah stok
+  **finally:** cetak pengecekan selesai
+end note
+
+class "Kode Utama (__main__)" as Main {
+}
+
+Main ..> InventarisBarang : creates instance
+Main ..> InventarisBarang : calls methods within try...except
+
+@enduml
